@@ -1,20 +1,22 @@
 // Gameboard interface
 
 const Gameboard = (()=>{
-    const x = "x";
-    const o = "o";
+
     const blank = "-";
     let gameboard = []
-    const initGameBoard = function(){
-        gameboard = []
+    const initGameBoard = () => {
+        
         for (let index = 0; index < 9; index++) {
+            
             gameboard[index] = blank;
+            
         }
         paintGameBoard(gameboard)
         
     }
+    
 
-    const paintGameBoard = function(gameboard) {
+    const paintGameBoard = (gameboard) => {
         
         for (let i in gameboard){
             let gridCellTarget = document.getElementById(i);
@@ -23,12 +25,19 @@ const Gameboard = (()=>{
     }
 
 
-    const cellClicked = function(gridCell){
+    const cellClicked = (gridCell,activePlayer) => {
         let gridCellid = gridCell.getAttribute('id')
-        console.log(gridCellid)
+        
         if(gameboard[gridCellid]===blank){
-            gameboard[gridCellid] = 'x'
+            gameboard[gridCellid] = activePlayer
             paintGameBoard(gameboard)
+            Players.switchActivePlayer();
+        } else {
+            
+            document.getElementById(gridCellid).classList.add("already-used")
+            setTimeout(function(){
+                document.getElementById(gridCellid).classList.remove("already-used")
+            }, 1000)
         }
 
     }
@@ -37,13 +46,13 @@ const Gameboard = (()=>{
     return {
         gameboard,
         initGameBoard,
-        paintGameBoard,
         cellClicked,
     };
 })();
 
 
 Gameboard.initGameBoard()
+console.log(Gameboard.gameboard)
 
 
 // Game Logic
@@ -53,9 +62,30 @@ const GameLogic = (()=>{
 
 
 
-})
+})();
 
 // Players
+const Players = (()=>{
+    const player1 = 'X';
+    const player2 = 'O';
+    let activePlayer = player1;
+    
+    const switchActivePlayer = () => {
+        if(activePlayer===player1){
+            activePlayer=player2
+            console.log(`active player after switch ${activePlayer}`)
+            
+        } else{
+            activePlayer=player1
+            console.log(`active player after switch ${activePlayer}`)
+            
+        }
+    };
+    return{
+        activePlayer,
+        switchActivePlayer,
+    };
+})();
 
 // Events 
 
@@ -64,7 +94,13 @@ gridCellArray = Array.from(gridCellArray)
 for (let index = 0; index < gridCellArray.length; index++) {
     const gridCell = gridCellArray[index];
     gridCell.addEventListener("click",()=>{
-        Gameboard.cellClicked(gridCell);
+        
+        console.log(`active player before click ${Players.activePlayer}`)
+        Gameboard.cellClicked(gridCell,Players.activePlayer);
+        
+        // console.log(`active player after click ${Players.activePlayer}`)
+        
+        
     })
     
 }
