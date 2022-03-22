@@ -24,7 +24,13 @@ const Gameboard = (()=>{
 
 
     const cellClicked = function(gridCell){
-        console.log(gridCell)
+        let gridCellid = gridCell.getAttribute('id')
+        console.log(gridCellid)
+        if(gameboard[gridCellid]===blank){
+            gameboard[gridCellid] = 'x'
+            paintGameBoard(gameboard)
+        }
+
     }
 
 
@@ -48,6 +54,8 @@ const GameLogic = (()=>{
 
 
 })
+
+// Players
 
 // Events 
 

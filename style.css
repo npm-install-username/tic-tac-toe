@@ -52,6 +52,7 @@
     padding: 25px;
     background-color: #e7e5e4;
     box-shadow:  0px 0px 18px -3px black;
+    border-radius: 5%;
 }
 
 .grid-cell{
@@ -62,6 +63,10 @@
     box-shadow: 0px 0px 12px -4px #a8a29e;
     border-radius: 10%;
     font-size: 30px;
+}
+
+.three-in-a-row{
+    background-color: #4ade80!important;
 }
 
 @media only screen and (max-width: 600px) {
