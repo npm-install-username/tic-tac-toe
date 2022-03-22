@@ -26,6 +26,16 @@
     background-color: #9f1239;
 }
 
+.left-active{
+    flex: 1;
+    background-color: #67e8f9;
+}
+
+.right-active{
+    flex: 1;
+    background-color: #f43f5e;
+}
+
 .game-grid{
     position: absolute;
     display: grid;
