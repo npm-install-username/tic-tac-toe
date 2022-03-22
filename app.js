@@ -2,33 +2,61 @@
 
 const Gameboard = (()=>{
     const x = "x";
-    const o = "o"
-    let gameboard = [[x,o,x],[o,x,o],[x,o,o]];
+    const o = "o";
+    const blank = "-";
+    let gameboard = []
+    const initGameBoard = function(){
+        gameboard = []
+        for (let index = 0; index < 9; index++) {
+            gameboard[index] = blank;
+        }
+        paintGameBoard(gameboard)
+        
+    }
 
     const paintGameBoard = function(gameboard) {
-        gameboard = gameboard.flat();
-        console.log(gameboard);
-        let gridCellArrary = document.querySelectorAll('grid-cell')
+        
         for (let i in gameboard){
-            console.log(i)
             let gridCellTarget = document.getElementById(i);
-            console.log(gridCellTarget)
             gridCellTarget.innerText = gameboard[i];
         };
     }
+
+
+    const cellClicked = function(gridCell){
+        console.log(gridCell)
+    }
+
+
     return {
         gameboard,
+        initGameBoard,
         paintGameBoard,
-        
+        cellClicked,
     };
 })();
 
 
-Gameboard.paintGameBoard(Gameboard.gameboard)
+Gameboard.initGameBoard()
 
 
 // Game Logic
 
 const GameLogic = (()=>{
+    
+
+
 
 })
+
+// Events 
+
+let gridCellArray = document.getElementsByClassName('grid-cell')
+gridCellArray = Array.from(gridCellArray)
+for (let index = 0; index < gridCellArray.length; index++) {
+    const gridCell = gridCellArray[index];
+    gridCell.addEventListener("click",()=>{
+        Gameboard.cellClicked(gridCell);
+    })
+    
+}
