@@ -47,6 +47,7 @@ const Gameboard = (()=>{
 
     return {
         gameboard,
+        blank,
         initGameBoard,
         cellClicked,
     };
@@ -63,9 +64,81 @@ const GameLogic = (()=>{
     
 
     const checkWin = () => {
-
+        
         // Check row
+        for (let i = 0; i < Gameboard.gameboard.length; i+=3) {
+            let gridCell1 = document.getElementById(i)
+            let gridCell2 = document.getElementById(i+1)
+            let gridCell3 = document.getElementById(i+2)
 
+            if(gridCell1.innerText === Gameboard.blank){
+                
+                continue;
+            }
+            if((gridCell1.innerText === gridCell2.innerText ) && (gridCell2.innerText === gridCell3.innerText) ){
+                
+                gridCell1.classList.add('three-in-a-row')
+                gridCell2.classList.add('three-in-a-row')
+                gridCell3.classList.add('three-in-a-row')
+            }
+            
+        }
+
+        // Check column
+        for (let i = 0; i < 3; i++) {
+            let gridCell1 = document.getElementById(i)
+            let gridCell2 = document.getElementById(i+3)
+            let gridCell3 = document.getElementById(i+6)
+            if(gridCell1.innerText === Gameboard.blank){
+                
+                continue;
+            }
+            if((gridCell1.innerText === gridCell2.innerText ) && (gridCell2.innerText === gridCell3.innerText) ){
+                
+                gridCell1.classList.add('three-in-a-row')
+                gridCell2.classList.add('three-in-a-row')
+                gridCell3.classList.add('three-in-a-row')
+            }
+            
+        }
+
+        // Check downwards right diagonal
+        for (let i = 0; i < 2; i+=2) {
+            let gridCell1 = document.getElementById(i)
+            let gridCell2 = document.getElementById(i+4)
+            let gridCell3 = document.getElementById(i+8)
+            if(gridCell1.innerText === Gameboard.blank){
+                
+                continue;
+            }
+            if((gridCell1.innerText === gridCell2.innerText ) && (gridCell2.innerText === gridCell3.innerText) ){
+                
+                gridCell1.classList.add('three-in-a-row')
+                gridCell2.classList.add('three-in-a-row')
+                gridCell3.classList.add('three-in-a-row')
+            }
+            
+            
+        }
+
+        // Check downwards left diagonal
+        for (let i = 2; i < 4; i+=2) {
+            let gridCell1 = document.getElementById(i)
+            let gridCell2 = document.getElementById(i+2)
+            let gridCell3 = document.getElementById(i+4)
+            if(gridCell1.innerText === Gameboard.blank){
+                
+                continue;
+            }
+            if((gridCell1.innerText === gridCell2.innerText ) && (gridCell2.innerText === gridCell3.innerText) ){
+                
+                gridCell1.classList.add('three-in-a-row')
+                gridCell2.classList.add('three-in-a-row')
+                gridCell3.classList.add('three-in-a-row')
+            }
+            
+            
+        }
     }
 
     return{
@@ -120,7 +193,7 @@ const Players = (()=>{
 
 let gridCellArray = document.getElementsByClassName('grid-cell')
 gridCellArray = Array.from(gridCellArray)
-console.log(gridCellArray)
+
 let activePlayer = Players.activePlayer
 for (let index = 0; index < gridCellArray.length; index++) {
     const gridCell = gridCellArray[index];
