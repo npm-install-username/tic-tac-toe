@@ -61,8 +61,13 @@ console.log(Gameboard.gameboard)
 
 const GameLogic = (()=>{
     
+    const checkWin = () => {
 
+    }
 
+    return{
+        checkWin
+    }
 
 })();
 
@@ -71,6 +76,21 @@ const Players = (()=>{
     const player1 = 'X';
     const player2 = 'O';
     let activePlayer = player1;
+    let activeSide = document.getElementById('left');
+
+    const setActiveSide = (activePlayer) => {
+        if(activePlayer === player1){
+            activeSide = 'left'
+            inactiveSide = 'right'
+            document.getElementById(activeSide).classList.add('left-active');
+            document.getElementById(inactiveSide).classList.remove('right-active');
+        } else{
+            activeSide = 'right'
+            inactiveSide = 'left'
+            document.getElementById(activeSide).classList.add('right-active');
+            document.getElementById(inactiveSide).classList.remove('left-active');
+        }
+    }
     
     const switchActivePlayer = () => {
         if(activePlayer===player1){
@@ -82,7 +102,9 @@ const Players = (()=>{
             activePlayer=player1
             console.log(`active player after switch ${activePlayer}`)
             
+            
         }
+        setActiveSide(activePlayer)
         return activePlayer
     };
     return{
@@ -107,10 +129,7 @@ for (let index = 0; index < gridCellArray.length; index++) {
             activePlayer = Players.switchActivePlayer()
             console.log(`new active ${activePlayer}`)
         }
-        
-        
-        
-        
+
     })
     
 }

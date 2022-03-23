@@ -28,12 +28,12 @@
 
 .left-active{
     flex: 1;
-    background-color: #67e8f9;
+    background-color: #67e8f9!important;
 }
 
 .right-active{
     flex: 1;
-    background-color: #f43f5e;
+    background-color: #f43f5e!important;
 }
 
 .game-grid{
