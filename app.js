@@ -31,7 +31,7 @@ const Gameboard = (()=>{
         if(gameboard[gridCellid]===blank){
             gameboard[gridCellid] = activePlayer
             paintGameBoard(gameboard)
-            Players.switchActivePlayer();
+            
         } else {
             
             document.getElementById(gridCellid).classList.add("already-used")
@@ -75,11 +75,13 @@ const Players = (()=>{
             activePlayer=player2
             console.log(`active player after switch ${activePlayer}`)
             
+            
         } else{
             activePlayer=player1
             console.log(`active player after switch ${activePlayer}`)
             
         }
+        return activePlayer
     };
     return{
         activePlayer,
@@ -91,13 +93,16 @@ const Players = (()=>{
 
 let gridCellArray = document.getElementsByClassName('grid-cell')
 gridCellArray = Array.from(gridCellArray)
+let activePlayer = Players.activePlayer
 for (let index = 0; index < gridCellArray.length; index++) {
     const gridCell = gridCellArray[index];
+  
     gridCell.addEventListener("click",()=>{
         
-        console.log(`active player before click ${Players.activePlayer}`)
-        Gameboard.cellClicked(gridCell,Players.activePlayer);
-        
+        console.log(`active player before click ${activePlayer}`)
+        Gameboard.cellClicked(gridCell,activePlayer);
+        activePlayer = Players.switchActivePlayer()
+        console.log(`new active ${activePlayer}`)
         // console.log(`active player after click ${Players.activePlayer}`)
         
         
