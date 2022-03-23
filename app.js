@@ -61,7 +61,10 @@ console.log(Gameboard.gameboard)
 
 const GameLogic = (()=>{
     
+
     const checkWin = () => {
+
+        // Check row
 
     }
 
@@ -95,12 +98,12 @@ const Players = (()=>{
     const switchActivePlayer = () => {
         if(activePlayer===player1){
             activePlayer=player2
-            console.log(`active player after switch ${activePlayer}`)
+            
             
             
         } else{
             activePlayer=player1
-            console.log(`active player after switch ${activePlayer}`)
+            
             
             
         }
@@ -117,19 +120,22 @@ const Players = (()=>{
 
 let gridCellArray = document.getElementsByClassName('grid-cell')
 gridCellArray = Array.from(gridCellArray)
+console.log(gridCellArray)
 let activePlayer = Players.activePlayer
 for (let index = 0; index < gridCellArray.length; index++) {
     const gridCell = gridCellArray[index];
   
     gridCell.addEventListener("click",()=>{
         
-        console.log(`active player before click ${activePlayer}`)
+        
         let cellClicked = Gameboard.cellClicked(gridCell,activePlayer);
         if(cellClicked ==="success"){
             activePlayer = Players.switchActivePlayer()
-            console.log(`new active ${activePlayer}`)
+            
+            console.log(Gameboard.gameboard)
+            GameLogic.checkWin()
         }
-
+        
     })
     
 }
