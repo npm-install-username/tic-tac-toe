@@ -31,13 +31,15 @@ const Gameboard = (()=>{
         if(gameboard[gridCellid]===blank){
             gameboard[gridCellid] = activePlayer
             paintGameBoard(gameboard)
-            
+            return "success"
         } else {
             
             document.getElementById(gridCellid).classList.add("already-used")
             setTimeout(function(){
                 document.getElementById(gridCellid).classList.remove("already-used")
             }, 1000)
+
+            return "fail"
         }
 
     }
@@ -100,10 +102,13 @@ for (let index = 0; index < gridCellArray.length; index++) {
     gridCell.addEventListener("click",()=>{
         
         console.log(`active player before click ${activePlayer}`)
-        Gameboard.cellClicked(gridCell,activePlayer);
-        activePlayer = Players.switchActivePlayer()
-        console.log(`new active ${activePlayer}`)
-        // console.log(`active player after click ${Players.activePlayer}`)
+        let cellClicked = Gameboard.cellClicked(gridCell,activePlayer);
+        if(cellClicked ==="success"){
+            activePlayer = Players.switchActivePlayer()
+            console.log(`new active ${activePlayer}`)
+        }
+        
+        
         
         
     })

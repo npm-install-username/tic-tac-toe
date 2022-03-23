@@ -14,14 +14,14 @@
     position: relative;
 }
 
-.left{
+#left{
     flex:1;
     background-color: #1e40af;
     
 
 }
 
-.right{
+#right{
     flex:1;
     background-color: #9f1239;
 }
