@@ -81,7 +81,7 @@ const GameLogic = (()=>{
                 gridCell1.classList.add('three-in-a-row')
                 gridCell2.classList.add('three-in-a-row')
                 gridCell3.classList.add('three-in-a-row')
-                
+                return true
             }
             
         }
@@ -100,7 +100,7 @@ const GameLogic = (()=>{
                 gridCell1.classList.add('three-in-a-row')
                 gridCell2.classList.add('three-in-a-row')
                 gridCell3.classList.add('three-in-a-row')
-               
+                return true
             }
             
         }
@@ -119,7 +119,7 @@ const GameLogic = (()=>{
                 gridCell1.classList.add('three-in-a-row')
                 gridCell2.classList.add('three-in-a-row')
                 gridCell3.classList.add('three-in-a-row')
-                
+                return true
             }
             
             
@@ -139,11 +139,12 @@ const GameLogic = (()=>{
                 gridCell1.classList.add('three-in-a-row')
                 gridCell2.classList.add('three-in-a-row')
                 gridCell3.classList.add('three-in-a-row')
-                
+                return true
             }
             
             
         }
+        return false
          
     }
 
@@ -211,14 +212,21 @@ for (let index = 0; index < gridCellArray.length; index++) {
         }
         
         let cellClicked = Gameboard.cellClicked(gridCell,activePlayer);
-        if (cellClicked === "win"){
-            return
-        }
+
         if(cellClicked ==="success"){
             activePlayer = Players.switchActivePlayer()
             
             console.log(Gameboard.gameboard)
-            GameLogic.checkWin()
+            let checkWin = GameLogic.checkWin()
+            if (checkWin){
+                let backgroundDiv = document.getElementById('background-div');
+                
+                let winMessage = document.createElement('div')
+                winMessage.classList.add('win-message')
+                backgroundDiv.appendChild(winMessage)
+                winMessage.innerHTML = "You Win!"
+                
+            }
         }
         
     })
