@@ -193,6 +193,8 @@ const Players = (()=>{
     return{
         activePlayer,
         switchActivePlayer,
+        player1,
+        player2
     };
 })();
 
@@ -224,11 +226,36 @@ for (let index = 0; index < gridCellArray.length; index++) {
                 let winMessage = document.createElement('div')
                 winMessage.classList.add('win-message')
                 backgroundDiv.appendChild(winMessage)
-                winMessage.innerHTML = "You Win!"
+                winMessage.innerHTML = "You Win!" 
                 
+                let playAgain = document.createElement('div')
+                playAgain.classList.add('play-again')
+                let playAgainBtn = document.createElement('button')
+                playAgainBtn.id = "play-again-btn"
+                playAgainBtn.innerHTML = "Play again?"
+                
+                backgroundDiv.appendChild(playAgain)
+                playAgain.appendChild(playAgainBtn)
+                
+                playAgainBtn.addEventListener('click',()=>{
+                    Gameboard.initGameBoard()
+
+                    while(threeInARow[0]){
+                        threeInARow[0].classList.remove('three-in-a-row')
+                    }
+                    console.log(Gameboard.gameboard)
+                    winMessage.parentNode.removeChild(winMessage)
+                    playAgain.parentNode.removeChild(playAgain)
+                    if (activePlayer === Players.player2){
+                        activePlayer = Players.switchActivePlayer()
+                    }
+
+                })
+
             }
         }
         
     })
     
 }
+
