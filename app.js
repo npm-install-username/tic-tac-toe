@@ -31,6 +31,7 @@ const Gameboard = (()=>{
         if(gameboard[gridCellid]===blank){
             gameboard[gridCellid] = activePlayer
             paintGameBoard(gameboard)
+
             return "success"
         } else {
             
@@ -80,6 +81,7 @@ const GameLogic = (()=>{
                 gridCell1.classList.add('three-in-a-row')
                 gridCell2.classList.add('three-in-a-row')
                 gridCell3.classList.add('three-in-a-row')
+                
             }
             
         }
@@ -98,6 +100,7 @@ const GameLogic = (()=>{
                 gridCell1.classList.add('three-in-a-row')
                 gridCell2.classList.add('three-in-a-row')
                 gridCell3.classList.add('three-in-a-row')
+               
             }
             
         }
@@ -116,6 +119,7 @@ const GameLogic = (()=>{
                 gridCell1.classList.add('three-in-a-row')
                 gridCell2.classList.add('three-in-a-row')
                 gridCell3.classList.add('three-in-a-row')
+                
             }
             
             
@@ -135,10 +139,12 @@ const GameLogic = (()=>{
                 gridCell1.classList.add('three-in-a-row')
                 gridCell2.classList.add('three-in-a-row')
                 gridCell3.classList.add('three-in-a-row')
+                
             }
             
             
         }
+         
     }
 
     return{
@@ -199,9 +205,15 @@ for (let index = 0; index < gridCellArray.length; index++) {
     const gridCell = gridCellArray[index];
   
     gridCell.addEventListener("click",()=>{
-        
+        let threeInARow = document.getElementsByClassName('three-in-a-row')
+        if(threeInARow.length != 0 ){
+            return 
+        }
         
         let cellClicked = Gameboard.cellClicked(gridCell,activePlayer);
+        if (cellClicked === "win"){
+            return
+        }
         if(cellClicked ==="success"){
             activePlayer = Players.switchActivePlayer()
             
